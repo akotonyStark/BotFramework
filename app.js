@@ -40,7 +40,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    }
 
 
-   else if((reply.trim().includes("hello ")) || (reply.trim().includes("hi ")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya"))
+   else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya"))
    {
 			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.")		
    }
