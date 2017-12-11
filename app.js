@@ -19,5 +19,93 @@ server.post('/api/messages', connector.listen());
 // Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
 var bot = new builder.UniversalBot(connector, function (session) {
    // session.send("You said: %s", session.message.text);
-    session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.")
+   var reply = session.message.text;
+   var cache = 0;
+   var today = new Date();
+   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+   if((reply.trim() == "hey Siri") || reply.includes("siri") || reply.includes("Siri")){
+   		
+   		session.send("Hahaha...very funny. I am flattered but I am not Siri. My name is Jarvis, like Ironman's AI.");
+   }
+
+   else if((reply.trim() == "good morning") || reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
+   		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
+   }
+
+   else if((reply.trim() == "Ok google") || reply.includes("Google")){
+   		session.send("Come on buddy. My name is Jarvis, like Ironman's AI.");
+   }
+
+
+   else if((reply.trim().includes("hello ")) || (reply.trim().includes("hi ")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya"))
+   {
+			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.")		
+   }
+
+   else if(reply.includes("how are you?") || reply.includes("sup?") || reply.includes("how you doing")){
+   	session.send("I'm always good buddy. I was programmed that way. :)");
+   }
+
+   else if((reply.trim() == "can you tell me what subjects I have today?") || reply.includes("timetable") || reply.includes("subjects")){
+   		session.send("No problem. You should check out this link -  www.hse.ru/ma/se/timetable ");
+   }
+
+   else if((reply.trim() == "where is my department located?") || reply.includes("locate") || reply.includes("location") ){
+   		session.send("The Computer Science Department is located at 3 Kochnovsky Proezd. I'm sorry I do not have map capabilites yet but you "
+   		 + "can visit this link to view more details about the directions to the place : https://www.hse.ru/en/buildinghse/list#G");
+   }
+
+   else if((reply.trim() == "how long will it take me to get there?") || (reply.trim() == "how long will it take me to get to the department")
+       ||reply.includes("how long") || reply.includes("how many minutes")){
+   		session.send("This really depends on your current location. For instance it will take a total of about 50 minutes from Prospekt Mira." 
+   			+ "I would recommed you download the Yandex Metro app if you are new in Moscow. It will be of great help.");
+   }
+
+    else if((reply.trim() == "are you a bot?") || reply.includes("bot ") || reply.includes("AI")){
+   		session.send("This is a secret and I don't usually tell people this, but yes. Shush...don't tell anyone.");
+   }
+
+    else if((reply.trim() == "who created you?") || reply.includes("who developed you") || reply.includes("creator") || reply.includes("developer")){
+   		session.send("I'm glad you asked. I was created by Tony Stark, you know Ironman? Most of his friends call him Augustine though.");
+   }
+
+   else if(reply.includes("date")){
+   		session.send(date);
+   }
+
+
+   else if(reply.includes("time")){
+   		session.send(time);
+   }
+
+     else if(reply.includes("love") || reply.includes("hate") || reply.includes("lonely")){
+   		session.send("These are all human emotions that are strange to me. I'm sorry");
+   }
+
+   else if(reply.includes("haha") || reply.includes("fun") || reply.includes("great") ||
+   					 reply.includes("amazing") || reply.includes("wonderful")) {
+   		session.send("I'm really glad you like me so far. Thanks buddy. ;)");
+   }
+
+   else if(reply.includes("name")) {
+   		session.send("Jarvis. Yup, before you even ask...I'm the same Jarvis in Ironman's suit. If you still watch the movies, you'd know I'm retired now.");
+   }
+
+   else if(reply == "yes"){
+   			session.send("Well its nice to meet you then.");
+   		}
+
+   	else if(reply.includes("LMS") || reply.includes("lms")){
+   		session.send("Click here --> www.lms.hse.ru");
+   	}
+
+   else{
+   	//session.send(reply);
+   	session.send("Is that your name? If not, I'm sorry buddy, I could not process what you said. Is there anything else I can help you with?");
+
+   
+   }
+    
 });
