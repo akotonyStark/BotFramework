@@ -19,7 +19,8 @@ server.post('/api/messages', connector.listen());
 // Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
 var bot = new builder.UniversalBot(connector, function (session) {
    // session.send("You said: %s", session.message.text);
-   var reply = session.message.text;
+   var response = session.message.text;
+   var reply = response.toLowerCase();
    var cache = 0;
    var today = new Date();
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -30,12 +31,12 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("Hahaha...very funny. I am flattered but I am not Siri. My name is Jarvis, like Ironman's AI.");
    }
 
-   else if((reply.trim() == "good morning") || reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
+   else if((reply.trim() == "Good morning") || reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
    		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
    }
 
    else if((reply.trim() == "Ok google") || reply.includes("Google")){
-   		session.send("Come on buddy. My name is Jarvis, like Ironman's AI.");
+   		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(");
    }
 
 
@@ -52,7 +53,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("No problem. You should check out this link -  www.hse.ru/ma/se/timetable ");
    }
 
-   else if((reply.trim() == "where is my department located?") || reply.includes("locate") || reply.includes("location") ){
+   else if((reply.trim().includes("where is my department")) || reply.includes("locate") || reply.includes("location") ){
    		session.send("The Computer Science Department is located at 3 Kochnovsky Proezd. I'm sorry I do not have map capabilites yet but you "
    		 + "can visit this link to view more details about the directions to the place : https://www.hse.ru/en/buildinghse/list#G");
    }
