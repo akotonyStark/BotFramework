@@ -72,6 +72,10 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("I'm glad you asked. I was created by Tony Stark, you know Ironman? Most of his friends call him Augustine though.");
    }
 
+	else if(reply.includes("thank")){
+   		session.send("You're welcome buddy. :)");
+   }
+
    else if(reply.includes("date")){
    		session.send(date);
    }
