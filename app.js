@@ -26,25 +26,26 @@ var bot = new builder.UniversalBot(connector, function (session) {
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-   if((reply.includes("hey Siri")) || reply.includes("siri") || reply.includes("Siri")){
+   if((reply.includes("hey siri")) || reply.includes("siri") || reply.includes("siri")){
    		
    		session.send("Hahaha...very funny. I am flattered but I am not Siri. My name is Jarvis, like Ironman's AI.");
    }
 
-   else if((reply.trim() == "Good morning") || reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
-   		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
-   }
-
-   else if((reply.includes("Ok google")) || reply.includes("Google")){
+	else if(reply == "ok google" || reply.includes("google"))
+   {
    		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(" );
    }
 
-
-   else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya"))
-   {
-			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.");		
+   else if(reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
+   		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
    }
 
+ 	else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya")) {
+			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.");		
+   	}
+
+   
+  
    else if(reply.includes("how are you?") || reply.includes("sup?") || reply.includes("how you doing")){
    	session.send("I'm always good buddy. I was programmed that way. :)");
    }
@@ -64,7 +65,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    			+ "I would recommed you download the Yandex Metro app if you are new in Moscow. It will be of great help.");
    }
 
-    else if((reply.trim() == "are you a bot?") || reply.includes("bot ") || reply.includes("AI")){
+    else if((reply.trim() == "are you a bot?") || reply.includes("bot ") || reply.includes("ai")){
    		session.send("This is a secret and I don't usually tell people this, but yes. Shush...don't tell anyone.");
    }
 
@@ -85,21 +86,24 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send(time);
    }
 
+ else if(reply.includes("alexan") || reply == "alexander")
+    {
+   		session.send("Do you mean Alexander Popovkin or Alexandrov Dmitry Vladmirovich?");
+  	 }
+
+    else if(reply.includes("popovk")){
+   		session.send("His friends call him Sasha. He's a really clever man. He teaches Dot NET Applications.");
+   }
+
+   else if(reply.includes("dmitry")){
+   	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.");
+   }
+
     else if(reply.includes("professor")){
    		session.send("There are a lot of professors in this department. Which one do you want to know about?");
    }
 
-    else if((reply.includes("Alexan")) || reply == "Alexander"){
-   		session.send("Do you mean Alexander Popovkin or Alexandrov Dmitry Vladmirovich?");
-   }
-
-    else if(reply.includes("Popovk")){
-   		session.send("His friends call him Sasha. He's a really clever man. He teaches Dot NET Applications.");
-   }
-
-   else if(reply.includes("Dmitry")){
-   	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.");
-   }
+   
 
  else if(reply.includes("where are you") || reply.includes("where do you live")){
    		session.send("I'm a bot buddy, I can live anywhere. Right now I'm in your phone on a chat app.");
@@ -126,7 +130,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    			session.send("Well its nice to meet you then.");
    		}
 
-   	else if(reply.includes("LMS") || reply.includes("lms")){
+   	else if(reply.includes("lms")){
    		session.send("Click here --> www.lms.hse.ru");
    	}
 
