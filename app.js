@@ -36,13 +36,13 @@ var bot = new builder.UniversalBot(connector, function (session) {
    }
 
    else if((reply.includes("Ok google")) || reply.includes("Google")){
-   		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(");
+   		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(" );
    }
 
 
    else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya"))
    {
-			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.")		
+			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.");		
    }
 
    else if(reply.includes("how are you?") || reply.includes("sup?") || reply.includes("how you doing")){
@@ -98,7 +98,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    }
 
    else if(reply.includes("Dmitry")){
-   	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.")
+   	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.");
    }
 
  else if(reply.includes("where are you") || reply.includes("where do you live")){
