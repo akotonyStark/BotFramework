@@ -81,7 +81,31 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send(time);
    }
 
-     else if(reply.includes("love") || reply.includes("hate") || reply.includes("lonely")){
+    else if(reply.includes("professor")){
+   		session.send("There are a lot of professors in this department. Which one do you want to know about?");
+   }
+
+
+    else if(reply.includes("Alexan")){
+   		session.send("Do you mean Alexander Popovkin or Alexandrov Dmitry Vladmirovich?");
+   }
+
+    else if(reply.includes("Popovk")){
+   		session.send("His friends call him Sasha. He's a really clever man. He teaches Dot NET Applications.");
+   }
+
+   else if(reply.includes("Dmitry")){
+   	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.")
+   }
+
+ else if(reply.includes("where are you") || reply.includes("where do you live")){
+   		session.send("I'm a bot buddy, I can live anywhere. Right now I'm in your phone on a chat app.");
+   }
+    else if(reply.includes("can I call you")){
+   		session.send("That's a nice name. But I think I'd prefer Jarvis. :)");
+   }
+
+     else if(reply.includes("love") || reply.includes("hate") || reply.includes("lonely") || reply.includes("like me") ){
    		session.send("These are all human emotions that are strange to me. I'm sorry");
    }
 
