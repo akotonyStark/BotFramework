@@ -101,7 +101,8 @@ var bot = new builder.UniversalBot(connector, function (session) {
  else if(reply.includes("where are you") || reply.includes("where do you live")){
    		session.send("I'm a bot buddy, I can live anywhere. Right now I'm in your phone on a chat app.");
    }
-    else if(reply.includes("can I call you")){
+
+    else if(reply.includes("can I call you") || reply.includes("call you ")){
    		session.send("That's a nice name. But I think I'd prefer Jarvis. :)");
    }
 
