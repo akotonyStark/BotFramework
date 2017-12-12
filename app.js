@@ -26,7 +26,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-   if((reply.trim() == "hey Siri") || reply.includes("siri") || reply.includes("Siri")){
+   if((reply.includes("hey Siri")) || reply.includes("siri") || reply.includes("Siri")){
    		
    		session.send("Hahaha...very funny. I am flattered but I am not Siri. My name is Jarvis, like Ironman's AI.");
    }
@@ -35,7 +35,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
    }
 
-   else if((reply.trim() == "Ok google") || reply.includes("Google")){
+   else if((reply.includes("Ok google")) || reply.includes("Google")){
    		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(");
    }
 
@@ -85,8 +85,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("There are a lot of professors in this department. Which one do you want to know about?");
    }
 
-
-    else if(reply.includes("Alexan")){
+    else if((reply.includes("Alexan")) || reply == "Alexander"){
    		session.send("Do you mean Alexander Popovkin or Alexandrov Dmitry Vladmirovich?");
    }
 
