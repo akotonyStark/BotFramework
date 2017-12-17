@@ -16,12 +16,15 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
+//global variables needed for memory recollection
+var cache = 0;
+var newName = " ";
+
 // Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
 var bot = new builder.UniversalBot(connector, function (session) {
    // session.send("You said: %s", session.message.text);
    var response = session.message.text;
    var reply = response.toLowerCase();
-   var cache = 0;
    var today = new Date();
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -34,6 +37,11 @@ var bot = new builder.UniversalBot(connector, function (session) {
 	else if(reply == "ok google" || reply.includes("google"))
    {
    		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(" );
+   }
+
+   else if(reply.includes("my name is"))
+   {
+   		session.send("Nice to meet you buddy :)");
    }
 
    else if(reply.includes("afternoon") || reply.includes("evening") || reply.includes("morning")){
@@ -122,12 +130,22 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("I'm really glad you like me so far. Thanks buddy. ;)");
    }
 
-   else if(reply.includes("name")) {
+   else if(reply.includes("your name")) {
    		session.send("Jarvis. Yup, before you even ask...I'm the same Jarvis in Ironman's suit. If you still watch the movies, you'd know I'm retired now.");
    }
 
-   else if(reply == "yes"){
-   			session.send("Well its nice to meet you then.");
+   else if(reply.includes("hungry") || reply.includes("eat") || reply.includes("food"))
+   {
+   		session.send("Would you like me to suggest some nice food places for you?" );
+   		cache = 1;
+   }
+
+   else if((reply == "yes" || reply == "yeah" || reply == "yup") && cache == 0){
+   			session.send("Well its nice to meet you %s.", newName);
+   		}
+
+   		else if((reply == "yes" || reply == "yeah" || reply == "yup") && cache == 1){
+   			session.send("As a student, I think the HSE Starlova would be best. But you can visit KFC, MacDonalds or Burger King if you're not comfortable with the canteen");
    		}
 
    	else if(reply.includes("lms")){
@@ -135,7 +153,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    	}
 
    else{
-   	//session.send(reply);
+   	newName = reply;
    	session.send("Is that your name? If not, I'm sorry buddy, I could not process what you said. Is there anything else I can help you with?");
 
    
