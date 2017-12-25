@@ -20,8 +20,63 @@ server.post('/api/messages', connector.listen());
 var cache = 0;
 var newName = " ";
 
+var CardNames = ['KFC', 'MacDonalds', 'Starlova'];
+
+   
+    function createCard(selectedCardName, session) {
+    switch (selectedCardName) {
+        case 'KFC':
+            return createFoodCard(session);
+
+        case 'MacDonalds':
+            return createMacCard(session);
+
+
+        case 'Starlova':
+            return createStarlovaCard(session);
+       
+        default:
+            return createStarlovaCard(session);
+    }
+}
+
+function createFoodCard(session) {
+    return new builder.AnimationCard(session)
+        .title('Campus Bot Food Suggestions')
+        .subtitle('KFC')
+        .image(builder.CardImage.create(session, 'https://d30v2pzvrfyzpo.cloudfront.net/images/chains/kfc-opengraph-1.jpg'))
+        .media([
+            { url: 'https://d30v2pzvrfyzpo.cloudfront.net/images/chains/kfc-opengraph-1.jpg' }
+        ]);
+              }
+
+
+function createMacCard(session) {
+    return new builder.AnimationCard(session)
+        .title('Campus Bot Food Suggestions')
+        .subtitle('MacDonalds')
+        .image(builder.CardImage.create(session, 'https://res.cloudinary.com/simpleview/image/upload/crm/macon/evm__750x5370-7eff519e5056a36_7eff53c7-5056-a36a-0a1af5bee3004d47.jpg'))
+         .media([
+            { url: 'https://res.cloudinary.com/simpleview/image/upload/crm/macon/evm__750x5370-7eff519e5056a36_7eff53c7-5056-a36a-0a1af5bee3004d47.jpg' }
+        ]);
+              }
+
+
+function createStarlovaCard(session) {
+    return new builder.AnimationCard(session)
+        .title('Campus Bot Food Suggestions')
+        .subtitle('HSE Starlova')
+        .image(builder.CardImage.create(session, 'https://d1iyzk9m7wu15x.cloudfront.net/app/uploads/2015/04/DSC7669.jpg'))
+        .media([
+            { url: 'https://d1iyzk9m7wu15x.cloudfront.net/app/uploads/2015/04/DSC7669.jpg' }
+        ]);
+              }
+
+
 // Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
-var bot = new builder.UniversalBot(connector, function (session) {
+var bot = new builder.UniversalBot(connector, [
+
+  function (session) {
    // session.send("You said: %s", session.message.text);
    var response = session.message.text;
    var reply = response.toLowerCase();
@@ -34,7 +89,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("Hahaha...very funny. I am flattered but I am not Siri. My name is Jarvis, like Ironman's AI.");
    }
 
-	else if(reply == "ok google" || reply.includes("google"))
+	 else if(reply == "ok google" || reply.includes("google"))
    {
    		session.send("Come on buddy. My name is Jarvis, like Ironman's AI. :(" );
    }
@@ -48,7 +103,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("Such a lovely day. Isn't it? Actually, I'm just kidding, i wouldn't know. I'm a bot. I have no emotions. hahahaha :)");
    }
 
- 	else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya")) {
+ 	  else if((reply.trim().includes("hello")) || (reply.trim().includes("hi")) || (reply.trim().includes("hey"))|| (reply.trim() == "heya")) {
 			session.send("Hi there, nice to meet you. I am your campus bot, you can call me Jarvis.");		
    	}
 
@@ -62,7 +117,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("No problem. You should check out this link -  www.hse.ru/ma/se/timetable ");
    }
 
-   else if((reply.trim().includes("where is my department")) || reply.includes("locate") || reply.includes("location") ){
+   else if((reply.trim().includes("where is my department")) || reply.includes("locate") || reply.includes("location") || reply.includes("find my department")){
    		session.send("The Computer Science Department is located at 3 Kochnovsky Proezd. I'm sorry I do not have map capabilites yet but you "
    		 + "can visit this link to view more details about the directions to the place : https://www.hse.ru/en/buildinghse/list#G");
    }
@@ -81,7 +136,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send("I'm glad you asked. I was created by Tony Stark, you know Ironman? Most of his friends call him Augustine though.");
    }
 
-	else if(reply.includes("thank")){
+	 else if(reply.includes("thank")){
    		session.send("You're welcome buddy. :)");
    }
 
@@ -94,7 +149,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		session.send(time);
    }
 
- else if(reply.includes("alexan") || reply == "alexander")
+    else if(reply.includes("alexan") || reply == "alexander")
     {
    		session.send("Do you mean Alexander Popovkin or Alexandrov Dmitry Vladmirovich?");
   	 }
@@ -107,13 +162,11 @@ var bot = new builder.UniversalBot(connector, function (session) {
    	session.send("He's the head of this department. He teaches iOS Applications Development. You can read more about him on the website.");
    }
 
-    else if(reply.includes("professor")){
-   		session.send("There are a lot of professors in this department. Which one do you want to know about?");
+    else if(reply.includes("professor") || reply.includes("teacher")){
+   		session.send("There are a lot of professors in this department. Which one do you want to know about? - https://www.hse.ru/en/ma/se/tutors");
    }
 
-   
-
- else if(reply.includes("where are you") || reply.includes("where do you live")){
+    else if(reply.includes("where are you") || reply.includes("where do you live")){
    		session.send("I'm a bot buddy, I can live anywhere. Right now I'm in your phone on a chat app.");
    }
 
@@ -145,8 +198,12 @@ var bot = new builder.UniversalBot(connector, function (session) {
    		}
 
    		else if((reply == "yes" || reply == "yeah" || reply == "yup") && cache == 1){
-   			session.send("As a student, I think the HSE Starlova would be best. But you can visit KFC, MacDonalds or Burger King if you're not comfortable with the canteen");
-   		}
+   			//session.send("As a student, I think the HSE Starlova would be best. But you can visit KFC, MacDonalds or Burger King if you're not comfortable with the canteen");
+   		builder.Prompts.choice(session, 'Which Food Place do you prefer?', CardNames, {
+            maxRetries: 3,
+            retryPrompt: 'Ooops, what you wrote is not a valid option, please try again'
+        });
+      }
 
    	else if(reply.includes("lms")){
    		session.send("Click here --> www.lms.hse.ru");
@@ -156,7 +213,38 @@ var bot = new builder.UniversalBot(connector, function (session) {
    	newName = reply;
    	session.send("Is that your name? If not, I'm sorry buddy, I could not process what you said. Is there anything else I can help you with?");
 
-   
    }
     
-});
+},
+
+
+function (session, results) {
+
+        // create the card based on selection
+        var selectedCardName = results.response.entity;
+        var card = createCard(selectedCardName, session);
+
+        // attach the card to the reply message
+        var msg = new builder.Message(session).addAttachment(card);
+        session.send(msg);
+    },
+
+]);
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
